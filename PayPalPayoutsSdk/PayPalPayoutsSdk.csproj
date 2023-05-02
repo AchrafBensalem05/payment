@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>1.1.1</PackageVersion>
+    <Owners>PayPal</Owners>
+    <PackageId>PayoutsSdk</PackageId>
+    <PackageProjectUrl>https://github.com/paypal/PAYOUTS-NET-SDK</PackageProjectUrl>
+    <PackageReleaseNotes>PayPal Payouts 2.0 SDK Release </PackageReleaseNotes>
+    <Title>PayoutsSdk</Title>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>PayPal</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PayPalHttp" Version="1.0.1" />
+  </ItemGroup>
+</Project>
