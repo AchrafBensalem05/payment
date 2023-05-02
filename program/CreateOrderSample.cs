@@ -19,7 +19,7 @@ namespace Samples.AuthorizeIntentExamples
         {
             OrderRequest orderRequest = new OrderRequest()
             {
-                CheckoutPaymentIntent = "AUTHORIZE",
+                CheckoutPaymentIntent = "CAPTURE",
 
                 ApplicationContext = new ApplicationContext
                 {
@@ -106,11 +106,11 @@ namespace Samples.AuthorizeIntentExamples
         {
             OrderRequest orderRequest = new OrderRequest()
             {
-                CheckoutPaymentIntent = "AUTHORIZE",
+                CheckoutPaymentIntent = "CAPTURE",
                 ApplicationContext = new ApplicationContext
                 {
                     CancelUrl = "https://www.example.com",
-                    ReturnUrl = "https://www.example.com"
+                    ReturnUrl = "https://www.example.com",
                 },
                 PurchaseUnits = new List<PurchaseUnitRequest>
                 {

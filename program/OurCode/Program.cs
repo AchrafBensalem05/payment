@@ -2,16 +2,32 @@
 using program;
 using Samples;
 using Samples.AuthorizeIntentExamples;
+using Samples.CaptureIntentExamples;
 
 
+
+
+
+// Create order
 var result = await CreateOrderSample.CreateOrderWithMinimumFields(true);
 
+// Ask user to approve through approve link
+var order = result.Result<Order>();
+var approveLink =  order.Links.Where(x => x.Rel == "approve").First();
 
-var order= result.Result<Order>();
+// display page for approval
+ Console.WriteLine(approveLink.Href);
 
-var newResult = await AuthorizeOrderSample.AuthorizeOrder(order.Id);
-order = newResult.Result<Order>();
+// If user approves
+// Capture order
+var res = await CaptureOrderSample.CaptureOrder(order.Id);
 
+
+
+
+
+//var newResult = await AuthorizeOrderSample.AuthorizeOrder(order.Id);
+//order = newResult.Result<Order>();
 
 Console.ReadLine();
 
@@ -25,3 +41,5 @@ Console.ReadLine();
 //};
 //var paymentInfo = new PaymentInfo() { Amount = 4.2 , CurrencyCode="USD", PaymentDate = DateTimeOffset.UtcNow };
 //var result = await handler.Pay(receiverInfo, paymentInfo);
+
+

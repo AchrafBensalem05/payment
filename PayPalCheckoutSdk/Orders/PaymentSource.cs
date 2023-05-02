@@ -6,7 +6,7 @@
 // DO NOT EDIT
 using System.Runtime.Serialization;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace PayPalCheckoutSdk.Orders
 {
