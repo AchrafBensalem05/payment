@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Runtime.Serialization.Json;
 
-namespace Samples
+namespace Stayin.Payment
 {
     public class PayPalClient
     {
@@ -21,10 +21,6 @@ namespace Samples
 
             var clientId = "AV6yctBGHFhutCxLixHSf-R6rPnm89kQrtfXtT_ExiX_RQ7jviwEt5CUtT7HxVrClfT9J0BpTo1ZNFm6";
             var secret = "EIgwq6UiNa_GNB27kzs7YRkAbltlQ10IqRjmsWHhDBEV-LgbREWsWfknPzjPHfHOvHH0D6Xip-TWnzTK";
-
-
-            //var clientId = "";
-            //var secret = "";
 
 
             return new SandboxEnvironment(clientId,secret);

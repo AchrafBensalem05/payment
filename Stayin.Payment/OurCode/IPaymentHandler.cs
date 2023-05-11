@@ -1,4 +1,4 @@
-﻿namespace program;
+﻿namespace Stayin.Payment;
 
 public interface IPaymentHandler
 {
@@ -8,8 +8,11 @@ public interface IPaymentHandler
     /// <param name="receiverInfo">Information about the user to pay</param>
     /// <param name="paymentInfo">Information about the payment to apply</param>
     /// <returns></returns>
-    Task<PaymentResult> Pay(UserPaymentInfo receiverInfo, PaymentInfo paymentInfo);
+    Task<PaymentResult> Pay(UserPaymentInfo receiverInfo, PayUserInfo paymentInfo);
 
-    Task<PaymentResult> GetPaid(UserPaymentInfo senderInfo, PaymentInfo paymentInfo);
+    Task<OrderCreationResult> CreatePaymentOrder(GetPaidInfo paymentInfo);
+
+
+    Task<OrderCaptureResult> CapturePaymentOrder(string orderId);
 
 }

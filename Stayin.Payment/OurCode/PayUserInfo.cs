@@ -1,6 +1,6 @@
-﻿namespace program;
+﻿namespace Stayin.Payment;
 
-public class PaymentInfo
+public class PayUserInfo
 {
     public required double Amount { get; set; }
     public required string CurrencyCode { get; set; }

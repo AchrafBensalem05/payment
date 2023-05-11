@@ -1,4 +1,4 @@
-﻿namespace program;
+﻿namespace Stayin.Payment;
 
 public class PaymentResult
 {

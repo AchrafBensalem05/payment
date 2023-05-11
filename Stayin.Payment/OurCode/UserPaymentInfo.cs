@@ -1,7 +1,7 @@
-﻿namespace program;
+﻿namespace Stayin.Payment;
 
 public class UserPaymentInfo
 {
-    public required string Id { get; set; }
+    public required string UserId { get; set; }
     public required string Email { get; set; }
 }
