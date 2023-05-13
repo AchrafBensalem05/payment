@@ -17,7 +17,7 @@ internal class PaymentHandler : IPaymentHandler
         {
             var response = await PayPalClient.client().Execute(request);
 
-            if(response.StatusCode != HttpStatusCode.OK)
+            if(response.StatusCode != HttpStatusCode.Created)
                 return new OrderCaptureResult() { Successful = false };
 
             return new OrderCaptureResult() { Successful = true };
@@ -60,7 +60,7 @@ internal class PaymentHandler : IPaymentHandler
         {
             var result = await PayPalClient.client().Execute(request);
 
-            if(result.StatusCode != HttpStatusCode.OK)
+            if(result.StatusCode != HttpStatusCode.Created)
                 return new OrderCreationResult() { Successful = false };
 
             // Ask user to approve through approve link

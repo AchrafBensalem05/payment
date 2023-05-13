@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using PayPalCheckoutSdk.Orders;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Stayin.Payment;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,24 +12,21 @@ builder.Services.AddTransient<IPaymentHandler, PaymentHandler>();
 var app = builder.Build();
 
 
-app.MapGet("/pay/user", async (IPaymentHandler paymentHandler, HttpResponse response) =>
-{
-    // TODO: get info from request
-    var receiverInfo = new UserPaymentInfo()
-    {
-        //Email = "ac.bensalemaa@gmail.com",
-        Email = "sb-474eec25806762@business.example.com",
-        UserId = Guid.NewGuid().ToString("N")
-    };
 
-    var paymentInfo = new PayUserInfo()
-    {
-        Amount = 4.2,
-        CurrencyCode = "USD",
-        PaymentDate = DateTimeOffset.UtcNow,
-    };
-    
-    var result = await paymentHandler.Pay(receiverInfo, paymentInfo);
+//{
+//    "UserPaymentInfo": {
+//        "Email": "sb-474eec25806762@business.example.com",
+//        "UserId": "1"
+//    },
+//    "PayUserInfo":{
+//        "Amount" : 999,
+//        "CurrencyCode" : "USD",
+//        "PaymentDate": "2019-07-26T16:59:57-05:00"
+//    }
+//}
+
+app.MapGet("/pay/user", async (IPaymentHandler paymentHandler, HttpResponse response, [FromBody] PayUserDto paymentDetails) => {
+    var result = await paymentHandler.Pay(paymentDetails.UserPaymentInfo, paymentDetails.PayUserInfo);
 
     await response.WriteAsJsonAsync(result);
 });
@@ -43,12 +41,21 @@ app.MapGet("/capture/{orderId}", async (HttpContext context, string orderId) =>
 });
 
 
-app.MapGet("/createPayment", async (HttpContext context, [FromBody] GetPaidInfo paymentInfo) =>
+
+//{
+//    "Amount": 50,
+//    "CurrencyCode": "USD",
+//    "PaymentDate": "2019-07-26T16:59:57-05:00",
+//    "CancelUrl": "https://youtube.com",
+//    "ReturnUrl": "https://github.com"
+//}
+
+app.MapPost("/create/order", async (HttpContext context, [FromBody] GetPaidInfo paymentInfo) =>
 {
+
     var paymentHandler = context.RequestServices.GetRequiredService<IPaymentHandler>();
 
     var result = await paymentHandler.CreatePaymentOrder(paymentInfo);
-
 
     await context.Response.WriteAsJsonAsync(result);
 });
