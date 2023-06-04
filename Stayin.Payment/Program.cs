@@ -22,7 +22,6 @@ var app = builder.Build();
 //        "Amount" : 999,
 //        "CurrencyCode" : "USD",
 //        "PaymentDate": "2019-07-26T16:59:57-05:00",
-//        "ReservationId": "33"
 //    }
 //}
 
@@ -47,6 +46,7 @@ app.MapGet("/capture/{orderId}", async (HttpContext context, string orderId) =>
 //    "Amount": 50,
 //    "CurrencyCode": "USD",
 //    "PaymentDate": "2019-07-26T16:59:57-05:00",
+//    "ReservationId": "33",
 //    "CancelUrl": "https://youtube.com",
 //    "ReturnUrl": "https://github.com"
 //}
