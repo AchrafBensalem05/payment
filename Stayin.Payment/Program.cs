@@ -21,7 +21,8 @@ var app = builder.Build();
 //    "PayUserInfo":{
 //        "Amount" : 999,
 //        "CurrencyCode" : "USD",
-//        "PaymentDate": "2019-07-26T16:59:57-05:00"
+//        "PaymentDate": "2019-07-26T16:59:57-05:00",
+//        "ReservationId": "33"
 //    }
 //}
 
@@ -56,7 +57,7 @@ app.MapPost("/create/order", async (HttpContext context, [FromBody] GetPaidInfo 
     var paymentHandler = context.RequestServices.GetRequiredService<IPaymentHandler>();
 
     var result = await paymentHandler.CreatePaymentOrder(paymentInfo);
-
+    
     await context.Response.WriteAsJsonAsync(result);
 });
 
