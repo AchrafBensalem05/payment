@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     /// A table that will contain all the events that have been consumed by our application
     /// </summary>
     public DbSet<BaseEvent> ConsumedEvents { get; set; }
+
     public DbSet<PaymentDetails> PaymentDetailsDb { get; set; }
 
     #endregion

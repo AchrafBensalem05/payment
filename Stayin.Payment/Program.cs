@@ -59,9 +59,7 @@ app.MapGet("/pay/user", async (IPaymentHandler paymentHandler, HttpResponse resp
 
 
 app.MapGet("/capture/{orderId}", async (HttpContext context, string orderId,IEventBus eventBus) =>
-{
-
-    
+{   
     var paymentHandler = context.RequestServices.GetRequiredService<IPaymentHandler>();
 
     var result = await paymentHandler.CapturePaymentOrder(orderId);

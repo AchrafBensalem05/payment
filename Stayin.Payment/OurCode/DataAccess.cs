@@ -60,7 +60,7 @@ public class DataAccess : IDataAccess
     /// <inheritdoc/>
     public Task CreateEventAsync(BaseEvent newEvent)
      => Task.FromResult(mDbContext.ConsumedEvents.Add(newEvent));
-    
+
     /// <inheritdoc/>
     public Task<bool> EnsureCreatedAsync() => mDbContext.Database.EnsureCreatedAsync();
 
@@ -70,6 +70,29 @@ public class DataAccess : IDataAccess
 
     /// <inheritdoc/>
     public Task SaveChangesAsync() => mDbContext.SaveChangesAsync();
+
+    public Task AddUserPaymentDetails(PaymentDetails details)
+    {
+        mDbContext.PaymentDetailsDb.Add(details);
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateUserEmail(string userId, string email)
+    {
+        var userDetails = mDbContext.PaymentDetailsDb.Where(x => x.UserId == userId).First();
+        userDetails.Email = email;
+        return Task.CompletedTask;
+    }
+
+    public Task DeleteUserDetails(string userId)
+    {
+        var toDelete = mDbContext.PaymentDetailsDb.First(x => x.UserId == userId);
+
+        mDbContext.PaymentDetailsDb.Remove(toDelete);
+
+        return Task.CompletedTask;
+    }
+
 
     #endregion
 }
