@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Stayin.Payment;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Stayin.Auth;
 using Stayin.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,7 +49,8 @@ var newlyCreated = await scope.ServiceProvider.GetRequiredService<IDataAccess>()
 //        "PaymentDate": "2019-07-26T16:59:57-05:00",
 //    }
 //}
-app.MapGet("/", () => "hello World");
+app.MapGet("/", 
+    () => "hello World");
 app.MapGet("/pay/user", async (IPaymentHandler paymentHandler, HttpResponse response, [FromBody] PayUserDto paymentDetails) => {
     var result = await paymentHandler.Pay(paymentDetails.UserPaymentInfo, paymentDetails.PayUserInfo);
     
@@ -60,7 +60,7 @@ app.MapGet("/pay/user", async (IPaymentHandler paymentHandler, HttpResponse resp
 
 app.MapGet("/capture/{orderId}", async (HttpContext context, string orderId,IEventBus eventBus) =>
 {
-    
+
     
     var paymentHandler = context.RequestServices.GetRequiredService<IPaymentHandler>();
 

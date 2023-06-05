@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Stayin.Auth;
 using Stayin.Core;
 
 namespace Stayin.Payment;

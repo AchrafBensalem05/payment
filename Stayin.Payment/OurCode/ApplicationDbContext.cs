@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Stayin.Core;
 
-namespace Stayin.Auth;
+namespace Stayin.Payment;
 
 /// <summary>
 /// The data context for the application database
