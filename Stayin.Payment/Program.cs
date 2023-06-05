@@ -51,6 +51,8 @@ var newlyCreated = await scope.ServiceProvider.GetRequiredService<IDataAccess>()
 //}
 app.MapGet("/", 
     () => "hello World");
+
+// TODO: turn fromBody to from database where we will pay all users in a  loop from the system
 app.MapGet("/pay/user", async (IPaymentHandler paymentHandler, HttpResponse response, [FromBody] PayUserDto paymentDetails) => {
     var result = await paymentHandler.Pay(paymentDetails.UserPaymentInfo, paymentDetails.PayUserInfo);
     
@@ -77,14 +79,19 @@ app.MapGet("/capture/{orderId}", async (HttpContext context, string orderId,IEve
 //    "ReturnUrl": "https://github.com"
 //}
 
-app.MapPost("/create/order", async (HttpContext context, [FromBody] GetPaidInfo paymentInfo) =>
+app.MapPost("/create/order", async (HttpContext context, [FromBody] GetPaidInfo paymentInfo, ApplicationDbContext db) =>
 {
 
     var paymentHandler = context.RequestServices.GetRequiredService<IPaymentHandler>();
-
     var result = await paymentHandler.CreatePaymentOrder(paymentInfo);
-    
     await context.Response.WriteAsJsonAsync(result);
+
+    var reservation = db.Reservations.First(x => x.Id == paymentInfo.ReservationId);
+    var landlordDetails = db.PaymentDetailsDb.First(x => x.UserId == reservation.LandlordId);
+    landlordDetails.Amount += paymentInfo.Amount * 0.85;
+    await db.SaveChangesAsync();
+
+
 });
 
 app.Run();

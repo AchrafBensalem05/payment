@@ -18,6 +18,10 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<PaymentDetails> PaymentDetailsDb { get; set; }
 
+    public DbSet<Rental> Reservations { get; set; }
+
+    public DbSet<HousePublication> Appartements { get; set; }
+
     #endregion
 
     #region Constructor
@@ -26,9 +30,9 @@ public class ApplicationDbContext : DbContext
     /// Default constructor
     /// </summary>
     /// <param name="options">The options to configure the database context</param>
-    public ApplicationDbContext(DbContextOptions options) :base(options){}
+    public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
     #endregion
 
-  
+
 }
