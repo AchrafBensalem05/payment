@@ -70,14 +70,14 @@ app.MapGet("/capture/{orderId}", async (HttpContext context, string orderId,IEve
 
 
 
-//{
-//    "Amount": 50,
-//    "CurrencyCode": "USD",
-//    "PaymentDate": "2019-07-26T16:59:57-05:00",
-//    "ReservationId": "33",
-//    "CancelUrl": "https://youtube.com",
-//    "ReturnUrl": "https://github.com"
-//}
+// {
+//     "Amount": 50,
+//     "CurrencyCode": "USD",
+//     "PaymentDate": "2019-07-26T16:59:57-05:00",
+//     "ReservationId": "33",
+//     "CancelUrl": "https://youtube.com",
+//     "ReturnUrl": "https://github.com"
+// }
 
 app.MapPost("/create/order", async (HttpContext context, [FromBody] GetPaidInfo paymentInfo, ApplicationDbContext db) =>
 {
@@ -86,10 +86,10 @@ app.MapPost("/create/order", async (HttpContext context, [FromBody] GetPaidInfo 
     var result = await paymentHandler.CreatePaymentOrder(paymentInfo);
     await context.Response.WriteAsJsonAsync(result);
 
-    var reservation = db.Reservations.First(x => x.Id == paymentInfo.ReservationId);
-    var landlordDetails = db.PaymentDetailsDb.First(x => x.UserId == reservation.LandlordId);
-    landlordDetails.Amount += paymentInfo.Amount * 0.85;
-    await db.SaveChangesAsync();
+    // var reservation = db.Reservations.First(x => x.Id == paymentInfo.ReservationId);
+    // var landlordDetails = db.PaymentDetailsDb.First(x => x.UserId == reservation.LandlordId);
+    // landlordDetails.Amount += paymentInfo.Amount * 0.85;
+    // await db.SaveChangesAsync();
 
 
 });

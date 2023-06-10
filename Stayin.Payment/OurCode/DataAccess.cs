@@ -71,6 +71,16 @@ public class DataAccess : IDataAccess
     /// <inheritdoc/>
     public Task SaveChangesAsync() => mDbContext.SaveChangesAsync();
 
+    public Task<List<(ApplicationUser User, List<ApplicationRole> Roles, int ReservationsCount, int PublicationsCount)>> GetUsersInPage(int page, int size)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<(ApplicationUser? User, List<ApplicationRole>? Roles, int ReservationsCount, int PublicationsCount)> GetUserDetails(string username)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task AddUserPaymentDetails(PaymentDetails details)
     {
         mDbContext.PaymentDetailsDb.Add(details);
@@ -93,6 +103,20 @@ public class DataAccess : IDataAccess
         return Task.CompletedTask;
     }
 
+    public Task AddRentalAsync(Rental rental)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task CreateHousePublicationAsync(HousePublication housePublication)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<HousePublication?> GetHousePublicationById(string id)
+    {
+        throw new NotImplementedException();
+    }
 
     #endregion
 }
